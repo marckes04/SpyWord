@@ -16,8 +16,60 @@ public class WordsGrid : MonoBehaviour
 
     void Start()
     {
-
+        SpawnGridSquares();
+        SetSquaresPositions();
     }
+
+    private void SetSquaresPositions()
+    {
+        var squareRect = _squareList[0].GetComponent<SpriteRenderer>().sprite.rect;
+        var squareTransform = _squareList[0].GetComponent<Transform>();
+
+        var offset = new Vector2
+        {
+            x = (squareRect.width * squareTransform.localScale.x + squareOffset) * 0.01f,
+            y = (squareRect.height * squareTransform.localScale.y + squareOffset) * 0.01f
+        };
+
+        var StartPosition = GetFirstSquarePosition();
+        int ColumnNumber = 0;
+        int RowNumber = 0;
+
+        foreach(var square in _squareList)
+        {
+            if(RowNumber + 1 > currentGameData.selectedBoardData.Rows)
+            {
+                ColumnNumber++;
+                RowNumber = 0;
+            }
+
+            var positionX = StartPosition.x + offset.x * ColumnNumber;
+            var positionY = StartPosition.y - offset.y * RowNumber;
+
+            square.GetComponent<Transform>().position = new Vector2(positionX, positionY);
+            RowNumber++;
+        }
+    }
+
+    private Vector2 GetFirstSquarePosition()
+    {
+        var startPosition = new Vector2(0f, transform.position.y);
+        var squareRect = _squareList[0].GetComponent<SpriteRenderer>().sprite.rect;
+        var squareTransform = _squareList[0].GetComponent<Transform>();
+        var squareSize = new Vector2(0f, 0f);
+
+        squareSize.x = squareRect.width * squareTransform.localScale.x;
+        squareSize.y = squareRect.height * squareTransform.localScale.y;
+
+        var midWidthPosition = (((currentGameData.selectedBoardData.Columns - 1) * squareSize.x) / 2) * 0.01f;
+        var midWidthHeight = (((currentGameData.selectedBoardData.Rows - 1) * squareSize.y) / 2) * 0.01f;
+
+        startPosition.x = (midWidthPosition != 0) ? midWidthPosition * -1 : midWidthPosition;
+        startPosition.y += midWidthHeight;
+
+        return startPosition;
+    }
+
 
     private void SpawnGridSquares()
     {
@@ -46,6 +98,10 @@ public class WordsGrid : MonoBehaviour
                     else
                     {
                         _squareList.Add(Instantiate(gridSquarePrefab));
+                        _squareList[_squareList.Count - 1].GetComponent<GridSquare>().SetSprite(normalLetterData,correctLetterData,selectedLetterData);
+                        _squareList[_squareList.Count - 1].transform.SetParent(this.transform);
+                        _squareList[_squareList.Count - 1].GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
+                        _squareList[_squareList.Count - 1].transform.localScale = squareScale;
                     }
                 }
             }
@@ -97,4 +153,6 @@ public class WordsGrid : MonoBehaviour
 
         return widht / 2;
     }
+
+
 }
