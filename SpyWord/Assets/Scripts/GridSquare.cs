@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GridSquare : MonoBehaviour
 {
-    public int SquareIndex { get; set; }
+    public int SquareIndex {get; set;}
 
     private AlphabetData.LetterData _normalLetterData;
     private AlphabetData.LetterData _selectedLetterData;
     private AlphabetData.LetterData _correctLetterData;
+
 
     private SpriteRenderer _displayedImage;
 
@@ -17,14 +18,6 @@ public class GridSquare : MonoBehaviour
     private int _index = -1;
     private bool _correct;
 
-    void Start()
-    {
-        _selected = false;
-        _clicked = false;
-        _correct = false;
-
-        _displayedImage = GetComponent<SpriteRenderer>();
-    }
 
     public void SetIndex(int index)
     {
@@ -36,25 +29,50 @@ public class GridSquare : MonoBehaviour
         return _index;
     }
 
+    void Start()
+    {
+        _selected = false;
+        _clicked = false;
+        _correct = false;
+        _displayedImage = GetComponent<SpriteRenderer>();
+    }
+
     private void OnEnable()
     {
-        GameEvents.OnEnableSquareSelection += onEnableSquareSelection;
+        GameEvents.OnEnableSquareSelection += OnEnableSquareSelection;
         GameEvents.OnDisableSquareSelection += OnDisableSquareSelection;
         GameEvents.OnSelectSquare += SelectSquare;
+        GameEvents.onCorrectWord += CorrectWord;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnEnableSquareSelection -= onEnableSquareSelection;
+        GameEvents.OnEnableSquareSelection -= OnEnableSquareSelection;
         GameEvents.OnDisableSquareSelection -= OnDisableSquareSelection;
         GameEvents.OnSelectSquare -= SelectSquare;
+        GameEvents.onCorrectWord -= CorrectWord;
     }
 
-    public void onEnableSquareSelection()
+    private void CorrectWord(string word, List<int> squareIndexes)
+    {
+        if (_selected && squareIndexes.Contains(_index))
+        {
+            _correct = true;
+            _displayedImage.sprite = _correctLetterData.image;
+        }
+
+        _selected = false;
+        _clicked = false;
+    }
+
+
+
+    public void OnEnableSquareSelection()
     {
         _clicked = true;
         _selected = false;
     }
+
 
     public void OnDisableSquareSelection()
     {
@@ -67,33 +85,34 @@ public class GridSquare : MonoBehaviour
             _displayedImage.sprite = _normalLetterData.image;
     }
 
-    public void SelectSquare(Vector3 position)
+    private void SelectSquare(Vector3 position)
     {
         if (this.gameObject.transform.position == position)
             _displayedImage.sprite = _selectedLetterData.image;
+
     }
 
-    public void SetSprite(AlphabetData.LetterData normalLetterData,
-        AlphabetData.LetterData selectedLetterData, AlphabetData.LetterData correctedLetterData)
+    public void SetSprite(AlphabetData.LetterData normalLetterData, AlphabetData.LetterData selectedLetterData,
+        AlphabetData.LetterData correctLetterData)
     {
         _normalLetterData = normalLetterData;
         _selectedLetterData = selectedLetterData;
-        _correctLetterData = correctedLetterData;
+        _correctLetterData = correctLetterData;
 
         GetComponent<SpriteRenderer>().sprite = _normalLetterData.image;
     }
 
     private void OnMouseDown()
     {
-        onEnableSquareSelection();
+        OnEnableSquareSelection();
         GameEvents.EnableSquareSelectionMethod();
-        checkSquare();
+        CheckSquare();
         _displayedImage.sprite = _selectedLetterData.image;
     }
 
     private void OnMouseEnter()
     {
-        checkSquare();
+        CheckSquare();
     }
 
     private void OnMouseUp()
@@ -102,9 +121,9 @@ public class GridSquare : MonoBehaviour
         GameEvents.DisableSquareSelectionMethod();
     }
 
-    public void checkSquare()
+    public void CheckSquare()
     {
-        if(_selected == false && _clicked == true)
+        if (_selected == false && _clicked == true)
         {
             _selected = true;
             GameEvents.CheckSquareMethod(_normalLetterData.letter, gameObject.transform.position, _index);

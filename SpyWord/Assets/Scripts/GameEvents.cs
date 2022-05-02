@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameEvents 
+public static class GameEvents
 {
     public delegate void EnableSquareSelection();
     public static event EnableSquareSelection OnEnableSquareSelection;
     public static void EnableSquareSelectionMethod()
     {
-        if(OnEnableSquareSelection != null)
+        if (OnEnableSquareSelection != null)
             OnEnableSquareSelection();
     }
     //*****************************************************************//
@@ -35,7 +35,7 @@ public static class GameEvents
     public static void CheckSquareMethod(string letter, Vector3 Squareposition, int squareIndex)
     {
         if (OnCheckSquare != null)
-            OnCheckSquare(letter,Squareposition,squareIndex);
+            OnCheckSquare(letter, Squareposition, squareIndex);
     }
 
     //*****************************************************************//
@@ -46,4 +46,20 @@ public static class GameEvents
         if (OnClearSelection != null)
             OnClearSelection();
     }
+
+    //******************************************************************//
+    public delegate void Correctword(string word, List<int> squareIndexes);
+
+    public static event Correctword onCorrectWord;
+
+    public static void CorrectWordMethod(string word, List<int> squareIndexes)
+    {
+        if(onCorrectWord != null)
+        {
+            onCorrectWord(word, squareIndexes);
+        }
+    }
+    //***********************************************************************//
+
+
 }

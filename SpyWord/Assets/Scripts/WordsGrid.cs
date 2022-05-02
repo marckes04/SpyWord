@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WordsGrid : MonoBehaviour
 {
+
     public GameData currentGameData;
-    public GameObject gridSquarePrefab;
+    public GameObject greedSquarePrefab;
     public AlphabetData alphabetData;
 
     public float squareOffset = 0.0f;
@@ -17,91 +18,102 @@ public class WordsGrid : MonoBehaviour
     void Start()
     {
         SpawnGridSquares();
-        SetSquaresPositions();
+        setSquaresPosition();
     }
 
-    private void SetSquaresPositions()
+    private void setSquaresPosition()
     {
-        var squareRect = _squareList[0].GetComponent<SpriteRenderer>().sprite.rect;
-        var squareTransform = _squareList[0].GetComponent<Transform>();
+        var SquareRect = _squareList[0].GetComponent<SpriteRenderer>().sprite.rect;
+        var SquareTransform = _squareList[0].GetComponent<Transform>();
 
         var offset = new Vector2
         {
-            x = (squareRect.width * squareTransform.localScale.x + squareOffset) * 0.01f,
-            y = (squareRect.height * squareTransform.localScale.y + squareOffset) * 0.01f
+            x = (SquareRect.width * SquareTransform.localScale.x + squareOffset) * 0.01f,
+            y = (SquareRect.height * SquareTransform.localScale.y + squareOffset) * 0.01f
         };
 
-        var StartPosition = GetFirstSquarePosition();
+        var startPosition = GetFirstSquarePosition();
         int ColumnNumber = 0;
         int RowNumber = 0;
 
-        foreach(var square in _squareList)
+        foreach (var square in _squareList)
         {
-            if(RowNumber + 1 > currentGameData.selectedBoardData.Rows)
+            if (RowNumber + 1 > currentGameData.selectedBoardData.Rows)
             {
                 ColumnNumber++;
                 RowNumber = 0;
             }
-
-            var positionX = StartPosition.x + offset.x * ColumnNumber;
-            var positionY = StartPosition.y - offset.y * RowNumber;
+            var positionX = startPosition.x + offset.x * ColumnNumber;
+            var positionY = startPosition.y - offset.y * RowNumber;
 
             square.GetComponent<Transform>().position = new Vector2(positionX, positionY);
             RowNumber++;
         }
     }
 
+
     private Vector2 GetFirstSquarePosition()
     {
-        var startPosition = new Vector2(0f, transform.position.y);
+        var StartPosition = new Vector2(0f, transform.position.y);
         var squareRect = _squareList[0].GetComponent<SpriteRenderer>().sprite.rect;
         var squareTransform = _squareList[0].GetComponent<Transform>();
         var squareSize = new Vector2(0f, 0f);
 
+
         squareSize.x = squareRect.width * squareTransform.localScale.x;
         squareSize.y = squareRect.height * squareTransform.localScale.y;
 
-        var midWidthPosition = (((currentGameData.selectedBoardData.Columns - 1) * squareSize.x) / 2) * 0.01f;
+        var miwidthPosition = (((currentGameData.selectedBoardData.Columns - 1) * squareSize.x) / 2) * 0.01f;
         var midWidthHeight = (((currentGameData.selectedBoardData.Rows - 1) * squareSize.y) / 2) * 0.01f;
 
-        startPosition.x = (midWidthPosition != 0) ? midWidthPosition * -1 : midWidthPosition;
-        startPosition.y += midWidthHeight;
+        StartPosition.x = (miwidthPosition != 0) ? miwidthPosition * -1 : miwidthPosition;
+        StartPosition.y += midWidthHeight;
 
-        return startPosition;
+
+        return StartPosition;
     }
+
+
 
 
     private void SpawnGridSquares()
     {
-        if(currentGameData != null)
-        {
-            var squareScale = GetSquareScale(new Vector3(1.5f, 1.5f, 0.1f));
-            foreach(var squares in currentGameData.selectedBoardData.Board)
-            {
-                foreach (var squareletter in squares.Row)
-                {
-                    var normalLetterData = alphabetData.AlphabetNormal.Find(data => data.letter == squareletter);
-                    var selectedLetterData = alphabetData.AlphabetHighlighted.Find(data => data.letter == squareletter);
-                    var correctLetterData = alphabetData.AlphabetWrong.Find(data => data.letter == squareletter);
 
-                    if(normalLetterData.image == null || selectedLetterData.image == null)
+
+        if (currentGameData != null)
+        {
+            var SquareScale = GetSquareScale(new Vector3(1.5f, 1.5f, 0.1f));
+            foreach (var squares in currentGameData.selectedBoardData.Board)
+            {
+                foreach (var squareLetter in squares.Row)
+                {
+                    var normalLetterData = alphabetData.AlphabetNormal.Find(data => data.letter == squareLetter);
+                    var selectedLetterData = alphabetData.AlphabetHighlighted.Find(data => data.letter == squareLetter);
+                    var correctedLetterData = alphabetData.AlphabetWrong.Find(data => data.letter == squareLetter);
+
+
+                    if (normalLetterData.image == null || selectedLetterData.image == null)
                     {
-                        Debug.LogError("All fields in your array should have some letters. Press Fill up with random button " +
-                            "in your board data to add random letter. Letter: " + squareletter);
-                        #if UNITY_EDITOR
+                        Debug.LogError(
+                            "All Fields in your Array should have some letters. Press Fill up the random button in your board data to add random letter.Letter: " + squareLetter);
+
+#if UNITY_EDITOR
                         if (UnityEditor.EditorApplication.isPlaying)
                         {
                             UnityEditor.EditorApplication.isPlaying = false;
                         }
-                        #endif
+
+#endif
                     }
+
                     else
                     {
-                        _squareList.Add(Instantiate(gridSquarePrefab));
-                        _squareList[_squareList.Count - 1].GetComponent<GridSquare>().SetSprite(normalLetterData,correctLetterData,selectedLetterData);
+                        _squareList.Add(Instantiate(greedSquarePrefab));
+                        _squareList[_squareList.Count - 1].GetComponent<GridSquare>().SetSprite(normalLetterData, correctedLetterData, selectedLetterData);
                         _squareList[_squareList.Count - 1].transform.SetParent(this.transform);
                         _squareList[_squareList.Count - 1].GetComponent<Transform>().position = new Vector3(0f, 0f, 0f);
-                        _squareList[_squareList.Count - 1].transform.localScale = squareScale;
+                        _squareList[_squareList.Count - 1].transform.localScale = SquareScale;
+                        _squareList[_squareList.Count - 1].GetComponent<GridSquare>().SetIndex(_squareList.Count - 1);
                     }
                 }
             }
@@ -111,48 +123,46 @@ public class WordsGrid : MonoBehaviour
     private Vector3 GetSquareScale(Vector3 defaultScale)
     {
         var finalScale = defaultScale;
-        var adjustment = 0.01f;
+        var adjusment = 0.01f;
 
-        while (shouldScaleDown(finalScale))
+        while (ShouldScaleDown(finalScale))
         {
-            finalScale.x -= adjustment;
-            finalScale.y -= adjustment;
+            finalScale.x -= adjusment;
+            finalScale.y -= adjusment;
 
-            if(finalScale.x <= 0 || finalScale.y <=0)
+            if (finalScale.x <= 0 || finalScale.y <= 0)
             {
-                finalScale.x = adjustment;
-                finalScale.y = adjustment;
+                finalScale.x = adjusment;
+                finalScale.y = adjusment;
                 return finalScale;
             }
         }
+
         return finalScale;
     }
 
-    private bool shouldScaleDown(Vector3 targetScale)
+    private bool ShouldScaleDown(Vector3 targetScale)
     {
-        var squareRect = gridSquarePrefab.GetComponent<SpriteRenderer>().sprite.rect;
-        var squareSize = new Vector2(0f,0f);
-        var startPosition = new Vector2(0f, 0f);
+        var SquareRect = greedSquarePrefab.GetComponent<SpriteRenderer>().sprite.rect;
+        var SquareSize = new Vector2(0f, 0f);
+        var StartPosition = new Vector2(0f, 0f);
 
-        squareSize.x = (squareRect.width * targetScale.x) + squareOffset;
-        squareSize.y = (squareRect.height * targetScale.y) + squareOffset;
+        SquareSize.x = (SquareRect.width * targetScale.x) + squareOffset;
+        SquareSize.y = (SquareRect.height * targetScale.y) + squareOffset;
 
-        var midWidthPosition = ((currentGameData.selectedBoardData.Columns * squareSize.x) / 2)*0.01f;
-        var midWidthHeight = ((currentGameData.selectedBoardData.Rows * squareSize.y) / 2) * 0.01f;
+        var midWidthPosition = ((currentGameData.selectedBoardData.Columns * SquareSize.x) / 2) * 0.01f;
+        var midHeightPosition = ((currentGameData.selectedBoardData.Rows * SquareSize.y) / 2) * 0.01f;
 
-        startPosition.x = (midWidthPosition != 0) ? midWidthPosition * -1 : midWidthPosition;
-        startPosition.y = midWidthHeight;
+        StartPosition.x = (midWidthPosition != 0) ? midWidthPosition * -1 : midWidthPosition;
+        StartPosition.y = midHeightPosition;
 
-        return startPosition.x < GethalfScreenWidht() * -1 || startPosition.y > topPosition;
+        return StartPosition.x < GetHalfScreenWidth() * -1 || StartPosition.y > topPosition;
     }
 
-    private float GethalfScreenWidht()
+    private float GetHalfScreenWidth()
     {
         float height = Camera.main.orthographicSize * 2;
-        float widht = (1.7f * height) * Screen.width / Screen.height;
-
-        return widht / 2;
+        float width = (1.7f * height) * Screen.width / Screen.height;
+        return width / 2;
     }
-
-
 }

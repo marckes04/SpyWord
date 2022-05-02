@@ -30,64 +30,64 @@ MonoBehaviour:
     - G
   - Size: 10
     Row:
-    - O
+    - B
     - D
     - J
-    - C
+    - A
     - G
     - A
     - R
     - T
-    - G
+    - P
     - A
   - Size: 10
     Row:
-    - B
+    - O
     - X
     - J
-    - J
+    - N
     - J
     - D
     - L
-    - B
+    - U
     - Q
     - P
   - Size: 10
     Row:
-    - I
+    - A
     - U
     - O
-    - C
+    - I
     - E
     - W
-    - A
+    - S
     - M
     - U
-    - B
+    - R
   - Size: 10
     Row:
-    - H
+    - R
     - Z
     - U
-    - H
+    - M
     - D
-    - Q
+    - S
     - X
     - O
     - X
     - E
   - Size: 10
     Row:
-    - U
+    - D
     - G
     - S
-    - T
-    - C
+    - A
+    - Y
     - X
     - B
     - I
     - J
-    - G
+    - M
   - Size: 10
     Row:
     - Y
@@ -99,7 +99,7 @@ MonoBehaviour:
     - Q
     - N
     - U
-    - I
+    - M
   - Size: 10
     Row:
     - V
@@ -111,7 +111,7 @@ MonoBehaviour:
     - D
     - U
     - P
-    - A
+    - U
   - Size: 10
     Row:
     - D
@@ -123,7 +123,7 @@ MonoBehaviour:
     - C
     - J
     - P
-    - N
+    - S
   - Size: 10
     Row:
     - E
@@ -138,3 +138,4 @@ MonoBehaviour:
     - K
   searchWords:
   - Word: SUMMER
+  - Word: BOARD
