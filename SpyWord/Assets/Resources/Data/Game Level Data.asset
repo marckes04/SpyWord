@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6176301210460449930016f921b00b, type: 3}
+  m_Name: Game Level Data
+  m_EditorClassIdentifier: 
+  data:
+  - CategoryName: Food
+    boardData:
+    - {fileID: 11400000, guid: f546a38318c7c084095a70938be7fb06, type: 2}
+    - {fileID: 11400000, guid: a4139b5561d23244b9f2e093674e0cb5, type: 2}
+    - {fileID: 11400000, guid: 32a6702577447f9498cf1cb0891cc779, type: 2}
+  - CategoryName: Animals
+    boardData:
+    - {fileID: 11400000, guid: 1b90fbe49eb514f43889d6a8bce8349b, type: 2}
+  - CategoryName: Sport
+    boardData: []
+  - CategoryName: Hobbies
+    boardData: []
+  - CategoryName: Work
+    boardData: []
+  - CategoryName: Countries
+    boardData: []

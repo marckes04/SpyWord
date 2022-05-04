@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c397edc93d4f2fe4f926482e893cea4c, type: 3}
+  m_Name: Food2
+  m_EditorClassIdentifier: 
+  TimeInSeconds: 0
+  Columns: 10
+  Rows: 10
+  Board:
+  - Size: 10
+    Row:
+    - V
+    - W
+    - K
+    - L
+    - Q
+    - U
+    - A
+    - V
+    - O
+    - K
+  - Size: 10
+    Row:
+    - Z
+    - B
+    - E
+    - A
+    - N
+    - I
+    - P
+    - K
+    - N
+    - V
+  - Size: 10
+    Row:
+    - Q
+    - S
+    - X
+    - Q
+    - R
+    - V
+    - W
+    - Z
+    - I
+    - Q
+  - Size: 10
+    Row:
+    - E
+    - Z
+    - F
+    - N
+    - J
+    - Z
+    - E
+    - U
+    - O
+    - F
+  - Size: 10
+    Row:
+    - C
+    - C
+    - J
+    - P
+    - X
+    - O
+    - A
+    - P
+    - N
+    - Q
+  - Size: 10
+    Row:
+    - I
+    - F
+    - Q
+    - G
+    - T
+    - T
+    - J
+    - I
+    - H
+    - N
+  - Size: 10
+    Row:
+    - R
+    - U
+    - H
+    - A
+    - V
+    - G
+    - F
+    - X
+    - D
+    - R
+  - Size: 10
+    Row:
+    - N
+    - X
+    - T
+    - Q
+    - M
+    - I
+    - K
+    - O
+    - T
+    - R
+  - Size: 10
+    Row:
+    - Q
+    - O
+    - X
+    - R
+    - T
+    - C
+    - Y
+    - A
+    - Q
+    - M
+  - Size: 10
+    Row:
+    - P
+    - I
+    - A
+    - Z
+    - C
+    - H
+    - I
+    - P
+    - S
+    - D
+  searchWords:
+  - Word: BEAN
+  - Word: POTATOE
+  - Word: RICE
+  - Word: ONION
+  - Word: CHIP
