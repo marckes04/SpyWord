@@ -209,7 +209,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 84312984}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 234213697}
+        m_TargetAssemblyTypeName: GameUtility, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &84312984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +271,7 @@ GameObject:
   - component: {fileID: 234213696}
   - component: {fileID: 234213695}
   - component: {fileID: 234213694}
+  - component: {fileID: 234213697}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -331,6 +344,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234213697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234213693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e347b87d7e81d488c65a4892150365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &284375567 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 143789597378644025, guid: 6bc04dd4cf99f5e4a9e81f86449efd43, type: 3}

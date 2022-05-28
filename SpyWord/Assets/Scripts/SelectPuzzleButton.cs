@@ -37,11 +37,22 @@ public class SelectPuzzleButton : MonoBehaviour
        
     }
 
-    
-    void Update()
+
+    private void OnEnable()
+    {
+        AdsManager.OnIntersitialAdsClosed += IntersitialAdColsed;
+    }
+
+    private void OnDisable()
+    {
+        AdsManager.OnIntersitialAdsClosed -= IntersitialAdColsed;
+    }
+
+    private void IntersitialAdColsed()
     {
         
     }
+
 
     private void UpdateButtonInformation()
     {
@@ -75,6 +86,7 @@ public class SelectPuzzleButton : MonoBehaviour
     private void OnButtonClick()
     {
         gameData.selectedCategoryName = gameObject.name;
+        AdsManager.Instance.ShowInterstitialAd();
         SceneManager.LoadScene(gameSceneName);
     }
 }

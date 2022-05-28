@@ -16,24 +16,30 @@ public class WinPopUp : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnBoardCompleted += ShowWinPopup;
+        AdsManager.OnIntersitialAdsClosed += IntersitialAdCompleted;
         
     }
 
     private void OnDisable()
     {
         GameEvents.OnBoardCompleted -= ShowWinPopup;
-        
+        AdsManager.OnIntersitialAdsClosed -= IntersitialAdCompleted;
+    }
+
+    private void IntersitialAdCompleted()
+    {
+
     }
 
     private void ShowWinPopup()
     {
-    
+        AdsManager.Instance.HideBanner();
         winPopUp.SetActive(true);
     }
 
     public void LoadNextLevel()
     {
-      
+        AdsManager.Instance.ShowInterstitialAd();
         GameEvents.LoadNextLevelMethod();
     }
 }

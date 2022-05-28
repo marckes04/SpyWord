@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class AdsManager : MonoBehaviour
     private InterstitialAd _interstitial;
 
     public static AdsManager Instance;
+
+    public static Action OnIntersitialAdsClosed;
 
 
     public void Awake()
@@ -35,6 +38,20 @@ public class AdsManager : MonoBehaviour
         MobileAds.Initialize(appId);
         this.CreateBanner(CreateRequest());
         this.CreateIntersitialAd(CreateRequest());
+
+        this._interstitial.OnAdClosed += InterstitialAdClosed;
+        
+    }
+
+    void OnDisable()
+    {
+        this._interstitial.OnAdClosed -= InterstitialAdClosed;
+    }
+
+    private void InterstitialAdClosed(object sender, EventArgs e)
+    {
+        if(OnIntersitialAdsClosed != null)
+        OnIntersitialAdsClosed();
     }
 
     private AdRequest CreateRequest()

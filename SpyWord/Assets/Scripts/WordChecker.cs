@@ -49,7 +49,7 @@ public class WordChecker : MonoBehaviour
     {
         _assignedPoints = 0;
         _completedWords = 0;
-
+        AdsManager.Instance.ShowBanner();
     }
 
     // Update is called once per frame
