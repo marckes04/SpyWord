@@ -89,9 +89,22 @@ public static class GameEvents
     //***********************************************************************//
     public delegate void GameOver();
     public static event GameOver OnGameOver;
+   
     public static void GameOverMethod()
     {
         if (OnGameOver != null)
             OnGameOver();
     }
+
+    //***********************************************************************//
+    public delegate void ToggleSoundFx();
+    public static event ToggleSoundFx OnToggleSoundFx;
+
+    public static void OnToggleSoundFxMethod()
+    {
+        if (OnToggleSoundFx != null)
+            OnToggleSoundFx();
+    }
+
+
 }
