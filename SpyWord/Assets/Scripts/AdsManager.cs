@@ -45,6 +45,7 @@ public class AdsManager : MonoBehaviour
 
     void OnDisable()
     {
+        if(_interstitial != null)
         this._interstitial.OnAdClosed -= InterstitialAdClosed;
     }
 
