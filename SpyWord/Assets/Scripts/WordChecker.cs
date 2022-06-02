@@ -47,6 +47,7 @@ public class WordChecker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentGameData.selectedBoardData.ClearData();
         _assignedPoints = 0;
         _completedWords = 0;
         AdsManager.Instance.ShowBanner();

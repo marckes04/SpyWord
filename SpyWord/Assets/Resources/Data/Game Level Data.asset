@@ -43,3 +43,18 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0d48cec1ccdd8a249a4246e2c7d02910, type: 2}
     - {fileID: 11400000, guid: 526c12ec414385642966aae978121751, type: 2}
     - {fileID: 11400000, guid: 496c42063a62c914eb93836066c76109, type: 2}
+  - CategoryName: test1
+    boardData:
+    - {fileID: 11400000, guid: 0d48cec1ccdd8a249a4246e2c7d02910, type: 2}
+    - {fileID: 11400000, guid: 526c12ec414385642966aae978121751, type: 2}
+    - {fileID: 11400000, guid: 496c42063a62c914eb93836066c76109, type: 2}
+  - CategoryName: test2
+    boardData:
+    - {fileID: 11400000, guid: 0d48cec1ccdd8a249a4246e2c7d02910, type: 2}
+    - {fileID: 11400000, guid: 526c12ec414385642966aae978121751, type: 2}
+    - {fileID: 11400000, guid: 496c42063a62c914eb93836066c76109, type: 2}
+  - CategoryName: test3
+    boardData:
+    - {fileID: 11400000, guid: 0d48cec1ccdd8a249a4246e2c7d02910, type: 2}
+    - {fileID: 11400000, guid: 526c12ec414385642966aae978121751, type: 2}
+    - {fileID: 11400000, guid: 496c42063a62c914eb93836066c76109, type: 2}
