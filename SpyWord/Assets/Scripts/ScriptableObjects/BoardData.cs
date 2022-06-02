@@ -11,6 +11,8 @@ public class BoardData : ScriptableObject
 
    public class searchingWord
     {
+        [HideInInspector]
+        public bool found = false;
         public string Word;
     }
 
